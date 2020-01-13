@@ -46,8 +46,7 @@ dependencies {
 	compile 'commons-lang:commons-lang:2.6'
 	// json解析工具
 	compile 'com.alibaba:fastjson:1.2.8'
-
-
+	// jwt oauth2授权
 	compile group: 'org.springframework.security', name: 'spring-security-jwt', version: '1.0.10.RELEASE'
 	compile group: 'org.springframework.security.oauth', name: 'spring-security-oauth2', version: '2.3.4.RELEASE'
 
