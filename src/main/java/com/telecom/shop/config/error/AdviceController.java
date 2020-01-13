@@ -6,10 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.validation.BindException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartException;
 
 import java.util.List;
@@ -24,7 +21,7 @@ import java.util.List;
  * @created Create Time: 2019/1/19
  */
 @RestController
-@ControllerAdvice
+@RestControllerAdvice
 public class AdviceController {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     /**
@@ -92,4 +89,5 @@ public class AdviceController {
         logger.error("空指针异常",ex);
         return appResult;
     }
+
 }
