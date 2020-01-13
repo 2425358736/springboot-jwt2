@@ -1,0 +1,51 @@
+package com.telecom.shop.util.upload;
+
+import lombok.Data;
+
+/**
+ * 开发公司：xxx公司
+ * 版权：xxx公司
+ * <p>
+ * OSSModle
+ *
+ * @author 刘志强
+ * @created Create Time: 2019/2/18
+ */
+@Data
+public class OSSModel {
+    /**
+     * 端点服务地址
+     */
+    private String endpoint;
+    /**
+     * accessKeyId
+     */
+    private String accessKeyId;
+    /**
+     * accessKeySecret
+     */
+    private String accessKeySecret;
+    /**
+     * 包名
+     */
+    private String bucketName;
+
+    /**
+     * 文件名策略 日期格式，
+     */
+    private String fileName;
+
+    /**
+     * 文件策略
+     */
+    private String dirName;
+    /**
+     *  图片文件夹策略 日期格式，
+     */
+    private String imgDirName;
+
+    /**
+     *  视频文件夹策略 日期格式，
+     */
+    private String videoDirName;
+}

@@ -1,0 +1,132 @@
+spring:
+  application:
+    name: recruit-app
+  #druid数据源相关配置配置
+  datasource:
+    url: jdbc:mysql://123.206.19.217:3306/telecom_mall?useUnicode=true&characterEncoding=UTF-8&tinyInt1isBit=false
+    username: root
+    password: lzq199528-d
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+
+    #连接池的配置信息
+    initialSize: 5
+    minIdle: 5
+    maxActive: 20
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    maxPoolPreparedStatementPerConnectionSize: 20
+    filters: stat,wall
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+    useGlobalDataSourceStat: true
+  # jpa
+  jpa:
+    properties:
+      hibernate:
+        hbm2ddl:
+          auto: update
+        # 存储引擎InnoDB
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+        # 打印sql
+        format_sql: true
+    show-sql: true
+  #redis配置数据
+  redis:
+    host: 123.206.19.217
+    port: 6379
+    database: 0
+    password:
+    jedis:
+      pool:
+        # 可以在给定的池中分配的最大连接数
+        maxActive: 8
+        # 池中的“空闲”连接的最大数目
+        maxIdle: 0
+        # 池中要维护的最小空闲连接数
+        minIdle: 8
+    ssl: false
+    timeout: 5000
+  #出现错误时, 直接抛出异常
+  mvc:
+    throw-exception-if-no-handler-found: true
+  # 为null不返回给前台
+  jackson:
+    default-property-inclusion: non_null
+  # 文件大小限制
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+  # 遇到相同名字时，是否允许覆盖注册
+  main:
+    allow-bean-definition-overriding: true
+
+server:
+  port: 8082
+  max-http-header-size: 10240
+
+logging:
+    config: classpath:log/logback.xml
+
+intercept:
+  noUrl: /v2/api-docs,/swagger-resources/**,/webjars/**,/druid/**
+---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+spring:
+  profiles: pro
+  datasource:
+    url: jdbc:mysql://123.206.19.217:3306/telecom_mall?useUnicode=true&characterEncoding=UTF-8&tinyInt1isBit=false
+    username: root
+    password: lzq199528-d
+  #redis配置数据
+  redis:
+    hostName: 123.206.19.217
+    port: 6379
+    database: 0
+    password:
+server:
+  port: 8080
+intercept:
+  noUrl:
+---
+
+spring:
+  profiles: test
+  datasource:
+    url: jdbc:mysql://123.206.19.217:3306/telecom_mall?useUnicode=true&characterEncoding=UTF-8&tinyInt1isBit=false
+    username: root
+    password: lzq199528-d
+  #redis配置数据
+  redis:
+    hostName: 123.206.19.217
+    port: 6379
+    database: 0
+    password:
+server:
+  port: 8081
+intercept:
+  noUrl: /v2/api-docs,/swagger-resources/**,/webjars/**,/druid/**
