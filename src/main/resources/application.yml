@@ -76,6 +76,10 @@ logging:
 
 intercept:
   noUrl: /v2/api-docs,/swagger-resources/**,/webjars/**,/druid/**
+jwt:
+  secret: secret
+  expiration: 7200000
+  token: Authorization
 ---
 
 
