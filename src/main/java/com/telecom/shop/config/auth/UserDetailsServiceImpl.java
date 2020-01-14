@@ -20,6 +20,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         User user = new User();
         user.setUserName(userName);
         user.setPassword("123456789");
+        if(user==null) {
+            throw new UsernameNotFoundException("无此用户");
+        }
         List<Auth> list = new ArrayList<>();
         list.add(new Auth("security:list"));
         list.add(new Auth("per2"));

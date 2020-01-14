@@ -1,5 +1,7 @@
 package com.telecom.shop.config.auth;
 
+import com.telecom.shop.config.auth.error.MyAccessDeniedHandler;
+import com.telecom.shop.config.auth.error.MyAuthenticationEntryPoint;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -31,5 +33,8 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     @Override
     public void configure(ResourceServerSecurityConfigurer resourceServerSecurityConfigurer) throws Exception {
         resourceServerSecurityConfigurer.tokenStore(tokenStore);
+        //自定义资源访问认证异常，没有token，或token错误，使用MyAuthenticationEntryPoint
+        resourceServerSecurityConfigurer.authenticationEntryPoint(new MyAuthenticationEntryPoint());
+        resourceServerSecurityConfigurer.accessDeniedHandler(new MyAccessDeniedHandler());
     }
 }

@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.ServletWebRequest;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
 
 /**
+ * 系统异常处理
  * @author admin
  */
 @RestController
@@ -25,8 +27,15 @@ public class GlobalErrorController implements ErrorController {
         return PATH;
     }
 
+    @Autowired
+    public GlobalErrorController(ErrorAttributes errorAttributes) {
+        this.errorAttributes=errorAttributes;
+    }
+
     @RequestMapping(value = PATH, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
     public AppResult handleError(HttpServletRequest request) {
-        return AppResult.errorReturn(500,errorAttributes.getError(new ServletWebRequest(request)).getLocalizedMessage());
+        ServletWebRequest requestAttributes =new ServletWebRequest(request);
+        Map<String, Object> attr = this.errorAttributes.getErrorAttributes(requestAttributes, false);
+        return AppResult.errorReturn((int)attr.get("status"),(String) attr.get("error"),(String) attr.get("message"));
     }
 }
