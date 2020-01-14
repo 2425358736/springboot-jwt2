@@ -44,6 +44,7 @@ public class OAuth2Config extends AuthorizationServerConfigurerAdapter {
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
         endpoints.tokenStore(tokenStore()).tokenEnhancer(jwtAccessTokenConverter())
                 .authenticationManager(authenticationManager)
+                .userDetailsService(userDetailsService)
                 .exceptionTranslator(new MyWebResponseExceptionTranslator());
     }
 
