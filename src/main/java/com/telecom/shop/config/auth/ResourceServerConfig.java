@@ -26,6 +26,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
         // 所有接口都需要验证访问
         httpSecurity
                 .authorizeRequests()
+                .antMatchers("/login").anonymous()
                 .anyRequest().authenticated()
                 .and()
                 .csrf().disable();
