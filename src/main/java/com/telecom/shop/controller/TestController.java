@@ -3,6 +3,7 @@ package com.telecom.shop.controller;
 import com.telecom.shop.config.auth.JwtTokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -21,6 +22,8 @@ public class TestController {
     private UserDetailsService userDetailsService;
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
+    @Autowired
+    private RedisTemplate redisTemplate;
 
     @GetMapping(value = "securityList", produces = { "application/json;charset=UTF-8" })
     @PreAuthorize("hasAnyAuthority('security:list')")
@@ -42,6 +45,7 @@ public class TestController {
     @PostMapping("/login")
     public String login(String userName,String password){
         UserDetails user =  userDetailsService.loadUserByUsername(userName);
+        redisTemplate.opsForValue().set("user2",user);
         String token = jwtTokenUtil.generateToken(user);
         return token;
     }
